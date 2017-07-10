@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0,
+ minimum-scale=1.0, maximum-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+      <label for="">账号<input type="text"></label><br>
+      <label for="">密码<input type="text"></label><br>
+      <label for=""><input type="button" value="登陆"></label>
+</body>
+</html>
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+
+    $('input:button').on('click',function(){
+        $.ajax({
+            url:'http://localhost:8000/login',
+            type:'get',
+            data:{account:'zhansan',password:'1234567'},
+            dataType:'json',
+            success:function(rs){
+                 switch(rs['state']){
+                     case '0':
+                     alert('密码错误！');
+                     break;
+                     case '1':
+                     alert('登陆成功');
+                     break;
+                     case '-1':
+                     alert('账号错误');
+                     break;
+                     default:
+                     alert('网络错误')
+                 }
+            }
+        })
+    })
+
+</script>
